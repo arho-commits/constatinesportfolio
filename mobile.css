@@ -37,6 +37,17 @@
   .cursor-glow { display: none; }
   /* Prevent any element from exceeding viewport width */
   img, video, iframe { max-width: 100%; height: auto; }
+  /* Ensure page never creates horizontal scroll on any device */
+  html, body { width: 100%; overflow-x: hidden !important; }
+
+  /* Make testimonial cards fit narrow screens */
+  .testimonial-card { min-width: auto; max-width: 100%; padding: 18px; }
+
+  /* Reduce large paddings that cause horizontal overflow */
+  .stat { padding: 16px 12px; }
+
+  /* Make about photo frame fluid instead of fixed pixels */
+  .about__photo-bg { width: 100%; height: auto; min-height: 220px; }
 }
 
 /* Slight adjustments for medium screens */
