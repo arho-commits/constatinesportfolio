@@ -419,6 +419,8 @@
                     if (entry.isIntersecting) {
                         // Set src if not already set
                         if (!video.src && src) {
+                            video.muted = true; // Essential for mobile autoplay
+                            video.setAttribute('playsinline', ''); // Essential for iOS
                             video.src = src;
                             video.load();
                         }
