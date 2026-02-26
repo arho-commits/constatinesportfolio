@@ -48,6 +48,14 @@
 
   /* Make about photo frame fluid instead of fixed pixels */
   .about__photo-bg { width: 100%; height: auto; min-height: 220px; }
+
+  /* Ensure the photo frame preserves aspect ratio on small screens
+     so the image has a definite height to fill (prevents 0px height) */
+  .about__photo-bg {
+    max-width: 340px;
+    aspect-ratio: 340 / 420;
+    height: auto;
+  }
 }
 
 /* Slight adjustments for medium screens */
