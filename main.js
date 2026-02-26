@@ -366,26 +366,46 @@
 
     /* ── BENTO CARD VIDEO MODAL ── */
     const vidModal = document.getElementById('vidModal');
+    const vidModalYT = document.getElementById('vidModalYT');
     const vidModalPlayer = document.getElementById('vidModalPlayer');
     const vidModalClose = document.getElementById('vidModalClose');
     const vidModalTag = document.getElementById('vidModalTag');
     const vidModalTitle = document.getElementById('vidModalTitle');
 
-    function openVidModal(src, title, tag) {
-        vidModalPlayer.src = src;
+    function openVidModal(src, title, tag, ytId = null) {
         vidModalTitle.textContent = title;
         vidModalTag.textContent = tag;
+
+        if (ytId) {
+            // YouTube Mode
+            vidModalPlayer.style.display = 'none';
+            vidModalYT.style.display = 'block';
+            vidModalYT.src = `https://www.youtube.com/embed/${ytId}?autoplay=1&rel=0`;
+            vidModalPlayer.src = '';
+        } else {
+            // Local Video Mode
+            vidModalYT.style.display = 'none';
+            vidModalPlayer.style.display = 'block';
+            vidModalPlayer.src = src;
+            vidModalPlayer.load();
+            vidModalPlayer.play().catch(() => { });
+            vidModalYT.src = '';
+        }
+
         vidModal.classList.add('open');
         document.body.style.overflow = 'hidden';
-        vidModalPlayer.load(); // Ensure player is ready for new source
-        vidModalPlayer.play().catch(() => { });
     }
 
     function closeVidModal() {
         vidModal.classList.remove('open');
         document.body.style.overflow = '';
+
+        // Stop local video
         vidModalPlayer.pause();
         vidModalPlayer.src = '';
+
+        // Stop YouTube video
+        vidModalYT.src = '';
     }
 
     document.querySelectorAll('.bento-card').forEach((card) => {
@@ -393,7 +413,8 @@
             const src = card.dataset.src;
             const title = card.dataset.title;
             const tag = card.dataset.tag;
-            if (src) openVidModal(src, title, tag);
+            const ytId = card.dataset.ytId; // New: optional YouTube ID
+            openVidModal(src, title, tag, ytId);
         });
     });
 
@@ -432,6 +453,13 @@
                             if (playPromise !== undefined) {
                                 playPromise.catch(() => { });
                             }
+
+                            // Smart 10-second snippet loop
+                            video.ontimeupdate = () => {
+                                if (video.currentTime > 10) {
+                                    video.currentTime = 0;
+                                }
+                            };
                         }, 100);
                     } else {
                         // Just pause, don't clear src to avoid redundant downloads

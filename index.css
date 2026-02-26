@@ -1883,8 +1883,6 @@ img {
   transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
     box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1),
     border-color 0.35s ease;
-  aspect-ratio: 16 / 9;
-  /* Ensure fixed height for IntersectionObserver */
 }
 
 .bento-card--featured {

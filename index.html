@@ -154,7 +154,12 @@
             d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
         </svg>
       </button>
-      <video class="vid-modal__player" id="vidModalPlayer" controls playsinline loop></video>
+      <div class="vid-modal__player-wrap">
+        <video class="vid-modal__player" id="vidModalPlayer" controls playsinline loop></video>
+        <iframe class="vid-modal__yt-player" id="vidModalYT" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen style="display:none; width:100%; aspect-ratio:16/9; border-radius:12px;"></iframe>
+      </div>
       <div class="vid-modal__info">
         <span class="vid-modal__tag" id="vidModalTag"></span>
         <h3 class="vid-modal__title" id="vidModalTitle"></h3>
@@ -176,7 +181,7 @@
 
         <!-- LARGE FEATURED — Mel -->
         <div class="bento-card bento-card--featured shimmer"
-          data-src="video files/this is the only client he has workded for (meue).mp4"
+          data-src="video files/this is the only client he has workded for (meue).mp4" data-yt-id="YU_MEUE_ID"
           data-title="Melanie Ohumu — Event Film" data-tag="✦ Melanie Ohumu · Event Coverage">
           <video class="bento-thumb" data-src="video files/this is the only client he has workded for (meue).mp4" muted
             playsinline preload="metadata" loop></video>
@@ -196,8 +201,8 @@
         </div>
 
         <!-- Small card — MWT -->
-        <div class="bento-card bento-card--sm shimmer" data-src="video files/MWT-2.mp4" data-title="MWT — Personal Edit"
-          data-tag="Short Film">
+        <div class="bento-card bento-card--sm shimmer" data-src="video files/MWT-2.mp4" data-yt-id="YU_MWT_ID"
+          data-title="MWT — Personal Edit" data-tag="Short Film">
           <video class="bento-thumb" data-src="video files/MWT-2.mp4" muted playsinline preload="metadata" loop></video>
           <div class="bento-card__overlay">
             <div class="bento-card__play-btn">
@@ -214,7 +219,7 @@
 
         <!-- Small card — Swordfish -->
         <div class="bento-card bento-card--sm shimmer" data-src="video files/swordfish mograph.mp4"
-          data-title="Swordfish — Motion Graphics" data-tag="Motion Graphics">
+          data-yt-id="YU_SWORDFISH_ID" data-title="Swordfish — Motion Graphics" data-tag="Motion Graphics">
           <video class="bento-thumb" data-src="video files/swordfish mograph.mp4" muted playsinline preload="metadata"
             loop></video>
           <div class="bento-card__overlay">
@@ -232,7 +237,7 @@
 
         <!-- Small card — Trendsetter -->
         <div class="bento-card bento-card--sm shimmer" data-src="video files/trendsetter mograph wmk_prob3.mov"
-          data-title="Trendsetter — Mograph" data-tag="Commercial Mograph">
+          data-yt-id="YU_TRENDSETTER_ID" data-title="Trendsetter — Mograph" data-tag="Commercial Mograph">
           <video class="bento-thumb" data-src="video files/trendsetter mograph wmk_prob3.mov" muted playsinline
             preload="metadata" loop></video>
           <div class="bento-card__overlay">
