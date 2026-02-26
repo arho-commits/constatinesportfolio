@@ -413,25 +413,43 @@
         const videoObs = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
+                    const video = entry.target;
+                    const src = video.dataset.src;
+
                     if (entry.isIntersecting) {
-                        const video = entry.target;
-                        // Set to metadata to fetch the thumbnail frame
-                        if (video.getAttribute('preload') !== 'metadata') {
-                            video.setAttribute('preload', 'metadata');
-                            video.load(); // Refresh state for new preload
+                        // Set src if not already set
+                        if (!video.src && src) {
+                            video.src = src;
+                            video.load();
                         }
-                        video.play().catch(() => { }); // Start the preview loop
-                        videoObs.unobserve(video);
+
+                        // Play the snippet
+                        const playPromise = video.play();
+                        if (playPromise !== undefined) {
+                            playPromise.catch(() => {
+                                // Autoplay might be blocked until user interaction
+                            });
+                        }
+                    } else {
+                        // Pause if not intersecting to save CPU/GPU
+                        video.pause();
+
+                        // Optional: Clear src to save memory if it's very heavy
+                        // video.src = '';
+                        // video.load();
                     }
                 });
             },
-            { threshold: 0.1, rootMargin: '0px 0px 300px 0px' } // Preload 300px before they appear
+            { threshold: 0.1, rootMargin: '0px 0px 100px 0px' }
         );
 
         bentoVideos.forEach((vid) => videoObs.observe(vid));
     } else {
         // Fallback for older browsers
-        bentoVideos.forEach((vid) => vid.setAttribute('preload', 'metadata'));
+        bentoVideos.forEach((vid) => {
+            if (vid.dataset.src) vid.src = vid.dataset.src;
+            vid.setAttribute('preload', 'metadata');
+        });
     }
 
 })();
