@@ -1168,6 +1168,14 @@ img {
   overflow: hidden;
 }
 
+/* Ensure the profile image fills its container cleanly */
+.about__photo-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .about__photo-bg::before {
   content: '';
   position: absolute;
