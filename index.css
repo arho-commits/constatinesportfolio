@@ -63,6 +63,33 @@ a {
 img {
   max-width: 100%;
   display: block;
+  background: var(--bg-card);
+  /* Placeholder color */
+}
+
+/* ── SHIMMER LOADING EFFECT ── */
+.shimmer {
+  position: relative;
+  overflow: hidden;
+  background: #121220;
+}
+
+.shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.05),
+      transparent);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
 }
 
 /* ── CURSOR GLOW ── */
@@ -1867,6 +1894,7 @@ img {
 
 .bento-card--sm {
   min-height: 180px;
+  aspect-ratio: 16 / 9;
 }
 
 .bento-card:nth-of-type(2) {
@@ -1910,8 +1938,10 @@ img {
   height: 100%;
   object-fit: cover;
   display: block;
+  background: #000;
+  /* Placeholder while video loads */
   opacity: 0;
-  transition: opacity 0.8s ease;
+  transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Fade in when video source is attached and ready */

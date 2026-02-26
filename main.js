@@ -417,32 +417,29 @@
                     const src = video.dataset.src;
 
                     if (entry.isIntersecting) {
-                        // Set src if not already set
-                        if (!video.src && src) {
-                            video.muted = true; // Essential for mobile autoplay
-                            video.setAttribute('playsinline', ''); // Essential for iOS
-                            video.src = src;
-                            video.load();
-                        }
+                        // Small delay to ensure the user isn't just scrolling past
+                        setTimeout(() => {
+                            if (!entry.isIntersecting) return;
 
-                        // Play the snippet
-                        const playPromise = video.play();
-                        if (playPromise !== undefined) {
-                            playPromise.catch(() => {
-                                // Autoplay might be blocked until user interaction
-                            });
-                        }
+                            if (!video.src && src) {
+                                video.muted = true;
+                                video.setAttribute('playsinline', '');
+                                video.src = src;
+                                video.load();
+                            }
+
+                            const playPromise = video.play();
+                            if (playPromise !== undefined) {
+                                playPromise.catch(() => { });
+                            }
+                        }, 100);
                     } else {
-                        // Pause if not intersecting to save CPU/GPU
+                        // Just pause, don't clear src to avoid redundant downloads
                         video.pause();
-
-                        // Optional: Clear src to save memory if it's very heavy
-                        // video.src = '';
-                        // video.load();
                     }
                 });
             },
-            { threshold: 0.1, rootMargin: '0px 0px 100px 0px' }
+            { threshold: 0.1, rootMargin: '0px 0px 300px 0px' }
         );
 
         bentoVideos.forEach((vid) => videoObs.observe(vid));
