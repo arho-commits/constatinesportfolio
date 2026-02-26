@@ -56,6 +56,41 @@
     aspect-ratio: 340 / 420;
     height: auto;
   }
+
+  /* Mobile: stack visual and make image larger, move availability pill below image */
+  .about__visual {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /* allow the photo to scale up to most of the viewport while keeping aspect ratio */
+  .about__photo-bg {
+    max-width: min(420px, 92vw);
+    width: 92vw;
+  }
+
+  .about__photo-img {
+    border-radius: 12px;
+  }
+
+  /* Place the availability pill below the image and make it compact */
+  .about__avail-pill {
+    position: static !important;
+    margin-top: 6px;
+    transform: none !important;
+    padding: 6px 10px !important;
+    border-radius: 999px !important;
+    font-size: 0.9rem !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-2);
+    border: 1px solid var(--border-glow);
+  }
+
+  .about__avail-dot { width: 9px; height: 9px; }
 }
 
 /* Slight adjustments for medium screens */
