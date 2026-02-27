@@ -215,6 +215,13 @@
     width: 9px;
     height: 9px;
   }
+
+  /* Fix for the initial "Play Showreel" modal content being squished */
+  .modal__video-wrap {
+    aspect-ratio: auto;
+    min-height: 320px;
+    padding-bottom: 20px;
+  }
 }
 
 /* Slight adjustments for medium screens */
