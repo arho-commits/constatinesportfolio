@@ -68,11 +68,13 @@
     if (hamburger && mobileMenu) {
         hamburger.addEventListener('click', () => {
             mobileMenu.classList.toggle('open');
+            hamburger.classList.toggle('open');
         });
 
         mobileLinks.forEach((link) => {
             link.addEventListener('click', () => {
                 mobileMenu.classList.remove('open');
+                hamburger.classList.remove('open');
             });
         });
 
@@ -80,6 +82,7 @@
         document.addEventListener('click', (e) => {
             if (!mobileMenu.contains(e.target) && !hamburger.contains(e.target)) {
                 mobileMenu.classList.remove('open');
+                hamburger.classList.remove('open');
             }
         });
     }
